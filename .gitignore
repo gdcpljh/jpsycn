@@ -18,3 +18,12 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+#Eclipse
+.project
+.classpath
+.settings
+
+#OSX
+.DS_Store
+
