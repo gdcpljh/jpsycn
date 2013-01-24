@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddActivity" >
+
+    <EditText
+        android:id="@+id/bbs_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="@string/bbs_hint"
+        android:inputType="textMultiLine">
+    </EditText>
+
+</LinearLayout>
