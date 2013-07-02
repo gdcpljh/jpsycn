@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class YYAdapter extends BaseAdapter {
+public class BBSDetailAdapter extends BaseAdapter {
 
 	private List<String> list;
 	private LayoutInflater mInflater;
 
-	public YYAdapter(Context context, List<String> list) {
+	public BBSDetailAdapter(Context context, List<String> list) {
 		this.list = list;
 		mInflater = LayoutInflater.from(context);
 	}

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.jpsycn.jixiao.ui.HomeActivity"
+            android:name="com.jpsycn.jixiao.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jpsycn.jixiao.ui.DetailActivity"
+            android:name="com.jpsycn.jixiao.ui.BBSDetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
         <activity

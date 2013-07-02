@@ -6,25 +6,26 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.jpsycn.jixiao.R;
 import com.jpsycn.jixiao.utils.DateUtil;
 import com.jpsycn.jixiao.utils.SysUtils;
 
-public class LogActivity extends BaseActivity {
+public class LogActivity extends Activity {
 
 	public ProgressDialog progressDialog;
 	private String content;
@@ -75,7 +76,7 @@ public class LogActivity extends BaseActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.submit, menu);
+		getMenuInflater().inflate(R.menu.submit, menu);
 		return true;
 	}
 

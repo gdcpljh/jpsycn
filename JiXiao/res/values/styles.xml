@@ -2,16 +2,13 @@
 <resources>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="@style/Theme.Sherlock.Light">
-        <item name="actionBarStyle">@style/ActionBarStyle</item>
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
     </style>
 
-    <style name="ActionBarStyle" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/actionBarColor</item>
         <item name="android:backgroundSplit">@color/splitActionbarColor</item>
-        <item name="background">@color/actionBarColor</item>
-        <item name="backgroundSplit">@color/actionBarColor</item>
     </style>
 
     <style name="textNoDataStyle">

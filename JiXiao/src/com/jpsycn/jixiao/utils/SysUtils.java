@@ -38,7 +38,7 @@ public class SysUtils {
 		map.put("savecheck", "2");
 		map.put("userpass", MD5.getMD5(password.getBytes()));
 
-		Response res = Jsoup.connect(Constants.LOGIN_URL).data(map)
+		Response res = Jsoup.connect(Constants.LOGIN_URL).timeout(10*1000).data(map)
 				.method(Method.POST).execute();
 
 		Map<String, String> cookies = res.cookies();
@@ -143,5 +143,11 @@ public class SysUtils {
 		map.put("struts.token", token);
 
 		Jsoup.connect(Constants.ADD_NOTE_URL).data(map).cookies(cookies).execute();
+	}
+
+	public static SortedMap<Integer, String> getLogList(
+			Map<String, String> cookies, String string) {
+		// TODO http://oa.jpsycn.com:8080/jxgl/log/log_to_query_enote.action?y=2013&m=6
+		return null;
 	}
 }

@@ -18,4 +18,13 @@
     <string name="log_hint">请填写今天的日志</string>
     <string name="log">日志内容：</string>
 
+    <string-array name="drawer_items">
+        <item>目标体系</item>
+        <item>我的日志</item>
+        <item>领导日志</item>
+        <item>公司公告</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    
 </resources>

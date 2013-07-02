@@ -1,57 +1,40 @@
 package com.jpsycn.jixiao.ui;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.jpsycn.jixiao.R;
-import com.jpsycn.jixiao.adapter.XXAdapter;
+import com.jpsycn.jixiao.adapter.BBSDetailAdapter;
 import com.jpsycn.jixiao.utils.SysUtils;
 
-public class HomeActivity extends BaseListActivity {
+public class BBSDetailActivity extends ListActivity {
 
-	private XXAdapter mAdapter;
-	private SortedMap<Integer, String> map;
+	private List<String> list;
 	private Map<String, String> cookies;
 	private ProgressDialog progressDialog;
+	public BBSDetailAdapter mAdapter;
+	private String id;
 	private SharedPreferences preferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		preferences = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-		String username = preferences.getString("username", "");
-		String password = preferences.getString("password", "");
-		if("".equals(username)||"".equals(password)){
-			Intent intent=new Intent(this,LoginActivity.class);
-			startActivity(intent);
-		}
-		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home);
+		setContentView(R.layout.activity_detail);
+
+		preferences=getSharedPreferences("userinfo",Context.MODE_PRIVATE);
 		XXAsyncTask task = new XXAsyncTask();
 		task.execute();
-
-	}
-	
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.refresh, menu);
-		getSupportMenuInflater().inflate(R.menu.edit, menu);
-		return true;
 	}
 
 	@Override
@@ -61,9 +44,11 @@ public class HomeActivity extends BaseListActivity {
 			XXAsyncTask task = new XXAsyncTask();
 			task.execute();
 			return true;
-		case R.id.menu_edit:
-			Intent intent=new Intent(this,LogActivity.class);
+		case R.id.menu_add:
+			Intent intent=new Intent(this,AddActivity.class);
+			intent.putExtra("id", id);
 			startActivity(intent);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -71,25 +56,26 @@ public class HomeActivity extends BaseListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-
-		Intent intent = new Intent(this, DetailActivity.class);
-		intent.putExtra("detailId",
-				String.valueOf(mAdapter.getItemId(position)));
-		intent.putExtra("bbsId", "999710");
-		startActivity(intent);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		getMenuInflater().inflate(R.menu.add, menu);
+		return true;
 	}
 
 	private class XXAsyncTask extends AsyncTask<Void, Void, Void> {
+
+		
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
 
 				cookies = SysUtils.getCookies(preferences.getString("username", ""), preferences.getString("password", ""));
-				map = SysUtils.getBBSList(cookies, "999710");
+				id = getIntent().getStringExtra("detailId");
 
+				list = SysUtils.getBBSDetail(cookies, "999710", id);
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;
@@ -97,7 +83,7 @@ public class HomeActivity extends BaseListActivity {
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(HomeActivity.this);
+			progressDialog = new ProgressDialog(BBSDetailActivity.this);
 			progressDialog.setMessage("正在请求数据,请稍候...");
 			progressDialog.show();
 		}
@@ -105,7 +91,7 @@ public class HomeActivity extends BaseListActivity {
 		@Override
 		protected void onPostExecute(Void result) {
 			progressDialog.dismiss();
-			mAdapter = new XXAdapter(HomeActivity.this, map);
+			mAdapter = new BBSDetailAdapter(BBSDetailActivity.this, list);
 			setListAdapter(mAdapter);
 		}
 	}
