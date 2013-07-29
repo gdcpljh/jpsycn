@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jpsycn.jixiao"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <!--
+    用户使用的skdk版本：android:minSdkVersion  就是最小的sdk版本，这个只对应不同版本的API Level 
+    如：Android 1.5 对应3，Android 1.6 对应4，Android 2.1 对应7，Android 2.2对应8，Android 
+  targetSdkVersion相对复杂一些，如果设置了此属性，那么在程序执行时，如果目标设备的API版本正好等于此数值，
+    他会告诉Android平台：此程序在此版本已经经过充分测，没有问题。不必为此程序开启兼容性检查判断的工作了。
+    也就是说，如果targetSdkVersion与目标设备的API版本相同时，运行效率可能会高一些。
+    -->
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+    
+   <uses-permission android:name="android.permission.INTERNET"/>
+    
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.jpsycn.jixiao.MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jpsycn.jixiao.LoginActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.jpsycn.jixiao.BBSListActivity"
+            android:label="@string/bbslist" />
+        <activity
+            android:name="com.jpsycn.jixiao.LeaderNoteActivity"
+            android:label="@string/leader_note" />
+        <activity
+            android:name="com.jpsycn.jixiao.NoteListActivity"
+            android:label="@string/note_list" />
+        <activity
+            android:name="com.jpsycn.jixiao.NoteWriteActivity"
+            android:label="@string/note_write" />
+        <activity
+            android:name="com.jpsycn.jixiao.NoticeActivity"
+            android:label="@string/notice" />
+    </application>
+
+</manifest>
