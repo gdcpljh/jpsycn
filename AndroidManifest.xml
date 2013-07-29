@@ -50,6 +50,9 @@
         <activity
             android:name="com.jpsycn.jixiao.NoticeActivity"
             android:label="@string/notice" />
+        
+        <activity
+            android:name="com.jpsycn.jixiao.Test"/>
     </application>
 
 </manifest>
