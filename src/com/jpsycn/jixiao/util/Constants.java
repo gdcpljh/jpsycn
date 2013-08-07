@@ -26,5 +26,6 @@ public class Constants {
 
 	public static final String TOKEN_REGEX = "\\<input.*?name\\s*=\\s*\"?struts.token\"?\\s+value=\"?(.*?)\"?\\s*/>";
 	public static final String BBS_LIST_REGEX = "\\<a\\s*href\\s*=\\s*\"\\s*http://oa.jpsycn.com:8080/jxgl//targetSystem/showBBS.action\\?id=(\\d+)&bbsId=999710\"><font\\s*color='.*'>(.*)</font>";
+	public static final String LOG_LIST = "http://oa.jpsycn.com:8080/jxgl/log/log_to_query_enote.action";
 
 }

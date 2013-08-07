@@ -16,6 +16,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.jpsycn.jixiao.bean.LogBean;
+
 public class SysUtils {
 
 
@@ -143,5 +145,54 @@ public class SysUtils {
 		map.put("struts.token", token);
 
 		Jsoup.connect(Constants.ADD_NOTE_URL).data(map).cookies(cookies).execute();
+	}
+	
+	/**
+	 * 获取日志列表
+	 * @param cookies
+	 * @param year
+	 * @param month
+	 */
+	public static void getLogBeanList(Map<String, String> cookies,String year,String month) {
+		try {
+
+			Map<String, String> para = new HashMap<String, String>();
+			para.put("y", year);
+			para.put("m", month);
+
+			Document doc = Jsoup.connect(Constants.LOG_LIST).data(para)
+					.cookies(cookies).get();
+
+			List<String> dates = JsoupUtil.parse(doc, "td[nowrap=nowrap]");
+
+			List<String> contents = JsoupUtil.parse(doc,"td[style=padding:5px 8px 5px 8px;]");
+
+			List<LogBean> beans = covertToLogBean(dates, contents);
+
+			System.out.println(beans);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static List<LogBean> covertToLogBean(List<String> dates,
+			List<String> contents) {
+
+		List<LogBean> list = new ArrayList<LogBean>();
+		LogBean b = null;
+		String temp = null;
+		for (int i = 0; i < contents.size(); i++) {
+			b = new LogBean();
+			b.setContent(contents.get(i));
+			temp = dates.get(i);
+			String[] split = temp.split(" ");
+
+			b.setWriteTime(DateUtil.strToDate((split[0] + " " + split[1]).substring(5)));
+			b.setDate(DateUtil.strToDate2(split[2].substring(6, 16)));
+			b.setStatus(split[3].substring(5, 7));
+			list.add(b);
+		}
+		return list;
 	}
 }
