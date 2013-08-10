@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.SortedMap;
 
-import com.jpsycn.jixiao.R;
-import com.jpsycn.jixiao.adapter.XXAdapter;
-import com.jpsycn.jixiao.util.SysUtils;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,8 +11,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
+
+import com.jpsycn.jixiao.adapter.XXAdapter;
+import com.jpsycn.jixiao.util.SysUtils;
 
 /**
  * 目标体系
@@ -27,22 +24,20 @@ import android.widget.Toast;
 public class BBSListActivity extends ListActivity {
 
 	private static final String TAG = "BBSListActivity";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bbs_list);
-		
-		MyAsyncTask task=new MyAsyncTask();
+
+		MyAsyncTask task = new MyAsyncTask();
 		task.execute();
-		
 
 	}
 
 	private class MyAsyncTask extends
 			AsyncTask<Void, Void, SortedMap<Integer, String>> {
 
-		
 		private ProgressDialog dialog;
 
 		@Override
@@ -56,10 +51,17 @@ public class BBSListActivity extends ListActivity {
 		@Override
 		protected SortedMap<Integer, String> doInBackground(Void... params) {
 			try {
-				Map<String, String> cookies = SysUtils.login("", "");
+				SharedPreferences preferences = getSharedPreferences(
+						"user_info", Context.MODE_PRIVATE);
+				String username = preferences.getString("username", "");
+				String password = preferences.getString("password", "");
 				
-				SortedMap<Integer,String> bbsList = SysUtils.getBBSList(cookies, "999710");
-				
+				Map<String, String> cookies = SysUtils
+						.login(username, password);
+
+				SortedMap<Integer, String> bbsList = SysUtils.getBBSList(
+						cookies, "999710");
+
 				return bbsList;
 			} catch (IOException e) {
 				Log.e(TAG, "获取目标体系异常：", e);
@@ -74,7 +76,7 @@ public class BBSListActivity extends ListActivity {
 
 			dialog.dismiss();
 
-			XXAdapter adapter=new XXAdapter(BBSListActivity.this, result);
+			XXAdapter adapter = new XXAdapter(BBSListActivity.this, result);
 
 			setListAdapter(adapter);
 		}

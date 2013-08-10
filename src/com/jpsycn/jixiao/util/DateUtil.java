@@ -24,9 +24,13 @@ public class DateUtil {
 		return null;
 	}
 
-	public static String formatToString(Date time, String pattern) {
+	public static String formatToString(Date date) {
+		return formatToString(date, "yyyy-MM-dd");
+	}
+	public static String formatToString(Date date, String pattern) {
+		
 		SimpleDateFormat format = new SimpleDateFormat(pattern,
 				Locale.getDefault());
-		return format.format(new Date());
+		return format.format(date);
 	}
 }

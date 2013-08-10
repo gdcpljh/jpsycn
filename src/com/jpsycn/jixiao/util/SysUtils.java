@@ -197,4 +197,48 @@ public class SysUtils {
 		}
 		return list;
 	}
+	
+	public static List<LogBean> getLeaderLog(Map<String, String> cookies,
+			String leaderId, String year, String month) throws IOException {
+
+		Map<String, String> para = new HashMap<String, String>();
+		para.put("page", "1");
+		para.put("ttype", "1");
+		para.put("duid", leaderId);
+		para.put("y", year);
+		para.put("m", month);
+		Document doc = Jsoup.connect(Constants.LEADER_LOG).data(para)
+				.cookies(cookies).get();
+
+		List<String> list = JsoupUtil
+				.parse(doc, "td[align=left],td[colspan=2]");
+
+		list.remove(0);
+		list.remove(0);
+
+		String temp = null;
+		LogBean b = null;
+		List<LogBean> result = new ArrayList<LogBean>();
+
+		for (int i = 0; i < list.size(); i += 3) {
+			b = new LogBean();
+			temp = list.get(i);
+			String[] split = temp.split(" ");
+			b.setWriteTime(DateUtil.strToDate((split[0] + " " + split[1])
+					.substring(5)));
+			b.setDate(DateUtil.strToDate2(split[2].substring(13, 23)));
+			b.setStatus(split[3].substring(4, 6));
+			result.add(b);
+		}
+		List<String> contents=new ArrayList<String>();
+		for(int i=2;i<list.size();i+=3){
+			contents.add(list.get(i));
+		}
+		
+		for(int i=0;i<result.size();i++){
+			result.get(i).setContent(contents.get(i));
+		}
+
+		return result;
+	}
 }
