@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
-						Intent intent=new Intent(MainActivity.this,Test.class);
+						Intent intent=new Intent(MainActivity.this,NoteListActivity.class);
 						startActivity(intent);
 					}
 				});

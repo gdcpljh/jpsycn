@@ -52,7 +52,7 @@
             android:label="@string/notice" />
         
         <activity
-            android:name="com.jpsycn.jixiao.Test"/>
+            android:name="com.jpsycn.jixiao.NoteDetailActivity"/>
     </application>
 
 </manifest>

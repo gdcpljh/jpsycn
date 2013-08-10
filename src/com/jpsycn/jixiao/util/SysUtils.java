@@ -152,13 +152,14 @@ public class SysUtils {
 	 * @param cookies
 	 * @param year
 	 * @param month
+	 * @return 
 	 */
-	public static void getLogBeanList(Map<String, String> cookies,String year,String month) {
+	public static List<LogBean> getLogBeanList(Map<String, String> cookies,int year,int month) {
 		try {
 
 			Map<String, String> para = new HashMap<String, String>();
-			para.put("y", year);
-			para.put("m", month);
+			para.put("y", String.valueOf(year));
+			para.put("m", String.valueOf(month));
 
 			Document doc = Jsoup.connect(Constants.LOG_LIST).data(para)
 					.cookies(cookies).get();
@@ -169,11 +170,12 @@ public class SysUtils {
 
 			List<LogBean> beans = covertToLogBean(dates, contents);
 
-			System.out.println(beans);
+			return beans;
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	private static List<LogBean> covertToLogBean(List<String> dates,

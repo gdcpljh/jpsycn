@@ -8,6 +8,8 @@ public class LogBean {
 	private Date date;
 	private Date writeTime;
 	private String status;
+	
+	
 	public String getContent() {
 		return content;
 	}
