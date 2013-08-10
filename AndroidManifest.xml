@@ -39,6 +39,9 @@
             android:name="com.jpsycn.jixiao.BBSListActivity"
             android:label="@string/bbslist" />
         <activity
+            android:name="com.jpsycn.jixiao.ExampleActivity"
+            android:label="@string/leader_note" />
+        <activity
             android:name="com.jpsycn.jixiao.LeaderNoteActivity"
             android:label="@string/leader_note" />
         <activity

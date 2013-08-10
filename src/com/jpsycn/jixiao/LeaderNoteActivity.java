@@ -24,8 +24,10 @@ public class LeaderNoteActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bbs_list);
 		
+		String leaderId = getIntent().getStringExtra("leader_id");
+		
 		MyAsyncTask task=new MyAsyncTask();
-		task.execute("879","2013", "8");
+		task.execute(leaderId,"2013", "8");
 		
 
 	}
